@@ -26,17 +26,19 @@ Create the name of the service account to use
 {{- end -}}
 
 {{- define "drone.server.provider" -}}
+{{- if hasKey .Values.server.env "DRONE_PROVIDER" }}
 {{- if eq .Values.server.env.DRONE_PROVIDER "github" -}}
-{{- print "%s" "DRONE_GITHUB" -}}
-{{- else if eq .Values.server.env.DRONE_PROVIDER "gitlab" -}}
-{{- print "DRONE_GITLAB" -}}
-{{- else if eq .Values.server.env.DRONE_PROVIDER "gitea" -}}
-{{- print "DRONE_GITEA" -}}
-{{- else if eq .Values.server.env.DRONE_PROVIDER "gogs" -}}
-{{- print "DRONE_GOGS" -}}
-{{- else if eq .Values.server.env.DRONE_PROVIDER "bitbucket" -}}
-{{- print "DRONE_BITBUCKET" -}}
-{{- else if eq .Values.server.env.DRONE_PROVIDER "coding" -}}
-{{- print "DRONE_CODING" -}}
+{{ printf "DRONE_GITHUB" -}}
+{{- else if eq .Values.server.env.DRONE_PROVIDER "gitlab" }}
+{{ printf "DRONE_GITLAB" -}}
+{{- else if eq .Values.server.env.DRONE_PROVIDER "gitea" }}
+{{ printf "DRONE_GITEA" -}}
+{{- else if eq .Values.server.env.DRONE_PROVIDER "gogs" }}
+{{ printf "DRONE_GOGS" -}}
+{{- else if eq .Values.server.env.DRONE_PROVIDER "bitbucket" }}
+{{ printf "DRONE_BITBUCKET" -}}
+{{- else if eq .Values.server.env.DRONE_PROVIDER "coding" }}
+{{ printf "DRONE_CODING" -}}
+{{- end -}}
 {{- end -}}
 {{- end -}}
